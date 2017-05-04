@@ -41,7 +41,7 @@ $.fn.S3Uploader = (options) ->
 
   setUploadForm = ->
     $uploadForm.find("input[type='file']").fileupload
-
+      dropZone: $('#dropzone')
       add: (e, data) ->
         file = data.files[0]
         file.unique_id = Math.random().toString(36).substr(2,16)
