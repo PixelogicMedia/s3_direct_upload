@@ -46,7 +46,6 @@ $.fn.S3Uploader = (options) ->
       dropZone: $('#dropzone')
       add: (e, data) ->
         debugger
-        data.xhr().setRequestHeader('Access-Control-Expose-Headers', 'x-amz-version-id');
         file = data.files[0]
         file.unique_id = Math.random().toString(36).substr(2,16)
         addFile = ->
