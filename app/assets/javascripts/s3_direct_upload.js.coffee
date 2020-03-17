@@ -45,11 +45,9 @@ $.fn.S3Uploader = (options) ->
     $uploadForm.find("input[type='file']").fileupload
       dropZone: $('#dropzone')
       add: (e, data) ->
-        debugger
         file = data.files[0]
         file.unique_id = Math.random().toString(36).substr(2,16)
         addFile = ->
-          debugger
           current_files.push data
           if $('#template-upload').length > 0
             data.context = $($.trim(tmpl("template-upload", file)))
@@ -148,8 +146,6 @@ $.fn.S3Uploader = (options) ->
         data
 
   build_content_object = ($uploadForm, file, data) ->
-    console.log data
-    debugger
     result = data.result
     content = {}
     if result # Use the S3 response to set the URL to avoid character encodings bugs
@@ -162,7 +158,7 @@ $.fn.S3Uploader = (options) ->
       content.url            = domain + key.replace('/{filename}', encodeURIComponent(file.name))
       content.url            = content.url.replace('/{cleaned_filename}', cleaned_filename(file.name))
 
-    content.hopa = data.response().jqXHR.getAllResponseHeaders()
+    content.version_id       = data.response().jqXHR.getResponseHeader('x-amz-version-id') if data.response()
     content.filename         = file.name
     content.filesize         = file.size if 'size' of file
     content.lastModifiedDate = file.lastModifiedDate if 'lastModifiedDate' of file
