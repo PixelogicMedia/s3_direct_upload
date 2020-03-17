@@ -147,6 +147,7 @@ $.fn.S3Uploader = (options) ->
 
   build_content_object = ($uploadForm, file, data) ->
     console.log data
+    debugger
     result = data.result
     content = {}
     if result # Use the S3 response to set the URL to avoid character encodings bugs
