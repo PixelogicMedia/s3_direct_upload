@@ -159,8 +159,6 @@ $.fn.S3Uploader = (options) ->
       content.url            = domain + key.replace('/{filename}', encodeURIComponent(file.name))
       content.url            = content.url.replace('/{cleaned_filename}', cleaned_filename(file.name))
 
-    content.fullresponse    = data.text()
-    content.fullresult = result.text()
     content.hopa = 'test test test'
     content.filename         = file.name
     content.filesize         = file.size if 'size' of file
