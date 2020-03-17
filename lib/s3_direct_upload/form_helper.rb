@@ -56,7 +56,7 @@ module S3DirectUpload
           :success_action_status => "201",
           'X-Requested-With' => 'xhr',
           "x-amz-server-side-encryption" => @options[:server_side_encryption],
-          "Access-Control-Request-Headers" => "*"
+          "Access-Control-Request-Headers" => "x-amz-version-id"
         }.delete_if { |k, v| v.nil? }
       end
 
