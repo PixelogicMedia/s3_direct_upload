@@ -56,7 +56,7 @@ module S3DirectUpload
           :success_action_status => "201",
           'X-Requested-With' => 'xhr',
           "x-amz-server-side-encryption" => @options[:server_side_encryption],
-          "Access-Control-Request-Headers" => "x-amz-version-id"
+          "Access-Control-Request-Headers" => "*"
         }.delete_if { |k, v| v.nil? }
       end
 
@@ -74,6 +74,7 @@ module S3DirectUpload
           conditions: [
             ["starts-with", "$key", @options[:key_starts_with]],
             ["starts-with", "$x-requested-with", ""],
+            ["starts-with", "$Access-Control-Request-Headers", ""],
             ["content-length-range", 0, @options[:max_file_size]],
             ["starts-with","$content-type", @options[:content_type_starts_with] ||""],
             {bucket: @options[:bucket]},
